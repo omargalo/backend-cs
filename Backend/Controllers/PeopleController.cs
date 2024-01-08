@@ -29,6 +29,19 @@ namespace Backend.Controllers
         public List<People> Get(string search) =>
             //Where es una funcion de orden superior, es decir, una funcion que recibe otra funcion como parametro
             Repository.People.Where(p => p.Name.ToLower().Contains(search.ToLower())).ToList();
+
+        [HttpPost]
+        public IActionResult Add(People people)
+        {
+            if (string.IsNullOrEmpty(people.Name))
+            {
+                return BadRequest("Name is required");
+            }
+
+            Repository.People.Add(people);
+
+            return NoContent();
+        }
     }    
 
     //simular una base de datos
