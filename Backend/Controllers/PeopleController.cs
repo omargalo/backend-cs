@@ -9,6 +9,16 @@ namespace Backend.Controllers
     {
         [HttpGet("all")]
         public List<People> GetPeople() => Repository.People;
+
+        [HttpGet("{id}")]
+        //First es una funcion de orden superior, es decir, una funcion que recibe otra funcion como parametro
+        public People Get(int id) => Repository.People.First(p => p.Id == id);
+
+        //Buscador
+        [HttpGet("search/{search}")]
+        public List<People> Get(string search) =>
+            //Where es una funcion de orden superior, es decir, una funcion que recibe otra funcion como parametro
+            Repository.People.Where(p => p.Name.ToLower().Contains(search.ToLower())).ToList();
     }    
 
     //simular una base de datos
