@@ -14,8 +14,13 @@ namespace Backend.Controllers
         }
 
         [HttpPost]
-        public decimal Add(decimal a, decimal b, Numbers numbers)
+        public decimal Add(Numbers numbers, [FromHeader] string Host,
+                                            [FromHeader(Name = "Content-Length")] string ContentLength,
+                                            [FromHeader(Name = "X-Something")] string Something)
         {
+            Console.WriteLine(Host);
+            Console.WriteLine(ContentLength);
+            Console.WriteLine(Something);
             return numbers.A - numbers.B;
         }
 
