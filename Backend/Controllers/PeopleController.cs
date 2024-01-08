@@ -11,8 +11,18 @@ namespace Backend.Controllers
         public List<People> GetPeople() => Repository.People;
 
         [HttpGet("{id}")]
-        //First es una funcion de orden superior, es decir, una funcion que recibe otra funcion como parametro
-        public People Get(int id) => Repository.People.First(p => p.Id == id);
+        //Usamos Generic (ActionResult) si no existe el recurso regresara un null 
+        public ActionResult<People> Get(int id)
+        {
+            var people = Repository.People.FirstOrDefault(p => p.Id == id);
+            
+            if (people == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(people);
+        }
 
         //Buscador
         [HttpGet("search/{search}")]
