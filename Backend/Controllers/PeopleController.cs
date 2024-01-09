@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Backend.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers
@@ -7,6 +8,14 @@ namespace Backend.Controllers
     [ApiController]
     public class PeopleController : ControllerBase
     {
+        //La interfaz es la que se encarga de la inyeccion de dependencias
+        private IPeopleService _peopleService;
+
+        public PeopleController(IPeopleService peopleService)
+        {
+            _peopleService = peopleService;
+        }
+
         [HttpGet("all")]
         public List<People> GetPeople() => Repository.People;
 
@@ -33,7 +42,7 @@ namespace Backend.Controllers
         [HttpPost]
         public IActionResult Add(People people)
         {
-            if (string.IsNullOrEmpty(people.Name))
+            if (!_peopleService.Validate(people))
             {
                 return BadRequest("Name is required");
             }
