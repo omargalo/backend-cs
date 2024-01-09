@@ -11,7 +11,7 @@ namespace Backend.Controllers
         //La interfaz es la que se encarga de la inyeccion de dependencias
         private IPeopleService _peopleService;
 
-        public PeopleController(IPeopleService peopleService)
+        public PeopleController([FromKeyedServices("people2Service")] IPeopleService peopleService)
         {
             _peopleService = peopleService;
         }
