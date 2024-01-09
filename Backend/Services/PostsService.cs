@@ -8,15 +8,14 @@ namespace Backend.Services
         private HttpClient _httpClient;
 
         //Constructor
-        public PostsService()
+        public PostsService(HttpClient httpClient)
         {
-            _httpClient = new HttpClient();
+            _httpClient = httpClient;
         }
 
         public async Task<IEnumerable<PostDto>> Get()
-        {
-            string url = "https://jsonplaceholder.typicode.com/posts";
-            var result = await _httpClient.GetAsync(url);
+        {            
+            var result = await _httpClient.GetAsync(_httpClient.BaseAddress);
             var body = await result.Content.ReadAsStringAsync();
 
             var options = new JsonSerializerOptions
