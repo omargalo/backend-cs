@@ -51,25 +51,9 @@ namespace Backend.Controllers
                 return BadRequest(validationResult.Errors);
             }
 
-            var beer = new Beer()
-            {
-                Name = beerInsertDto.Name,
-                BrandId = beerInsertDto.BrandId,
-                Alcohol = beerInsertDto.Alcohol
-            };
+            var beerDto = await _beerService.Add(beerInsertDto);
 
-            await _context.Beers.AddAsync(beer);
-            await _context.SaveChangesAsync();
-
-            var beerDto = new BeerDto
-            {
-                BeerId = beer.BeerId,
-                Name = beer.Name,
-                BrandId = beer.BrandId,
-                Alcohol = beer.Alcohol
-            };
-
-            return CreatedAtAction(nameof(GetById), new { id = beer.BeerId }, beerDto);
+            return CreatedAtAction(nameof(GetById), new { id = beerDto.BeerId }, beerDto);
         }
 
         [HttpPut("{id}")]
