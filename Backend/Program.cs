@@ -16,8 +16,8 @@ builder.Services.AddKeyedSingleton<IPeopleService, people2Service>("people2Servi
 builder.Services.AddKeyedSingleton<IRandomService, RandomService>("randomSingleton");
 builder.Services.AddKeyedScoped<IRandomService, RandomService>("randomScoped");
 builder.Services.AddKeyedTransient<IRandomService, RandomService>("randomTransient");
-
 builder.Services.AddScoped<IPostsService, PostsService>();
+builder.Services.AddScoped<IBeerService, BeerService>();
 
 // HttpClient service JsonPlaceholder
 builder.Services.AddHttpClient<IPostsService, PostsService>(c =>
