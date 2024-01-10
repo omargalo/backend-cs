@@ -133,8 +133,16 @@ namespace Backend.Controllers
 
             _context.Beers.Remove(beer);
             await _context.SaveChangesAsync();
-            
-            return NoContent();
+
+            var beerDto = new BeerDto
+            {
+                BeerId = beer.BeerId,
+                Name = beer.Name,
+                BrandId = beer.BrandId,
+                Alcohol = beer.Alcohol
+            };
+
+            return Ok(beerDto);
         }
     }
 }
