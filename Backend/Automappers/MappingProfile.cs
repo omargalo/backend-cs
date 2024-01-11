@@ -10,6 +10,10 @@ namespace Backend.Automappers
         {
             // When mapping from BeerInsertDto to Beer, map the properties with the same name
             CreateMap<BeerInsertDto, Beer>();
+            // When mapping from BeerInsertDto to Beer, map the properties with different name
+            CreateMap<Beer, BeerDto>()
+                .ForMember(dto => dto.BeerId,   //dto.Id
+                            m => m.MapFrom(b => b.BeerId));
         }
     }
 }
