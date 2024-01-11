@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Backend.DTOs;
+using Backend.Models;
 
 namespace Backend.Automappers
 {
@@ -6,7 +8,8 @@ namespace Backend.Automappers
     {
         public MappingProfile()
         {
-            // CreateMap<Source, Destination>();
+            // When mapping from BeerInsertDto to Beer, map the properties with the same name
+            CreateMap<BeerInsertDto, Beer>();
         }
     }
 }
