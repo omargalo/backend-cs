@@ -28,13 +28,10 @@ namespace Backend.Repository
         }
         
 
-        public void Delete(Beer entity)
-        {
-            throw new NotImplementedException();
-        }        
+        public void Delete(Beer beer) =>
+            _context.Beers.Remove(beer);               
 
         public async Task Save() =>
-            await _context.SaveChangesAsync();
-                
+            await _context.SaveChangesAsync();                
     }
 }
