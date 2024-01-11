@@ -8,12 +8,14 @@ namespace Backend.Automappers
     {
         public MappingProfile()
         {
-            // When mapping from BeerInsertDto to Beer, map the properties with the same name
+            // Mapping from BeerInsertDto to Beer, map the properties with the same name
             CreateMap<BeerInsertDto, Beer>();
-            // When mapping from BeerInsertDto to Beer, map the properties with different name
+            // Mapping from Beer to BeerInsertDto, map the properties with different name
             CreateMap<Beer, BeerDto>()
                 .ForMember(dto => dto.BeerId,   //dto.Id
                             m => m.MapFrom(b => b.BeerId));
+            // Mapping from existing object
+            CreateMap<BeerUpdateDto, Beer>();
         }
     }
 }
